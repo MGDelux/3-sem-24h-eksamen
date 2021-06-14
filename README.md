@@ -2,7 +2,7 @@
 Master Branch:
 <br>
 [![Build Status](https://travis-ci.com/MGDelux/3-sem-24h-eksamen.svg?branch=main)](https://travis-ci.com/MGDelux/3-sem-24h-eksamen)<h1 align="center">24h-Exam</h1>
-<h3 align="center">BMathias</h3>
+<h3 align="center">Mathias</h3>
 
 - BACK-END [page:](http://solidcode.xyz/3semEksame)
 
