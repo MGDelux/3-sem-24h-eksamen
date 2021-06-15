@@ -7,6 +7,7 @@ package facade;
 
 import entities.Developer;
 import entities.Project;
+import entities.ProjectHours;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.ws.rs.WebApplicationException;
@@ -86,4 +87,39 @@ public class ProjectFacade {
        return project;
     }
 
+    public Project newProjectHours(Developer dev, Project project, ProjectHours hours){
+           List<ProjectHours> projecth;
+           EntityManager em = emf.createEntityManager();
+
+     try{
+         projecth = project.getProjectInfo();
+         projecth.add(hours);
+         hours.setDev(dev);
+         project.setProjectInfo(projecth);
+         
+     }catch (Exception e){
+         throw new WebApplicationException("ERROR in adding project infomation " + e);
+     }
+     try{
+        em.getTransaction().begin();
+       em.merge(project);
+       em.getTransaction().commit();
+     }catch (Exception e){
+         throw new WebApplicationException("SQL/EM ERROR in adding project infomation " + e);
+     }
+     return project;
+    }
+    
+    public Project getProject(String projectName){
+     EntityManager em = emf.createEntityManager();
+     Project project;
+     try{
+       project = em.find(Project.class, projectName);
+
+     }catch (Exception e){
+         throw new WebApplicationException("Cannot find a projet with the name "+ projectName + " " + e);
+     }
+ return project;
+    }
+    
 }

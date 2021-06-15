@@ -20,8 +20,8 @@ public class ProjectHours implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private double hoursSpendt;
     private String userStory;
     private String description;
@@ -30,11 +30,10 @@ public class ProjectHours implements Serializable {
     public ProjectHours() {
     }
 
-    public ProjectHours(double hoursSpendt, String userStory, String description, Developer dev) {
+    public ProjectHours(double hoursSpendt, String userStory, String description) {
         this.hoursSpendt = hoursSpendt;
         this.userStory = userStory;
         this.description = description;
-        this.dev = dev;
     }
 
     
@@ -48,11 +47,11 @@ public class ProjectHours implements Serializable {
     }
     
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -78,6 +77,11 @@ public class ProjectHours implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "ProjectHours{" + "hoursSpendt=" + hoursSpendt + ", userStory=" + userStory + ", description=" + description + ", dev=" + dev + '}';
     }
     
     

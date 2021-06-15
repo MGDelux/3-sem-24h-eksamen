@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -25,23 +27,29 @@ public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long projectId;
+     @Basic(optional = false)
+  @NotNull
     private String projectName;
     private String Description;
-    
-    
     @ManyToMany(mappedBy = "projects", fetch=FetchType.EAGER)
     private List<Developer> devs;
      @OneToMany(targetEntity = ProjectHours.class,cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
     private List<ProjectHours> projectInfo;
-    
+    private double totalTime;
     public Project() {
     }
 
     public Project(String projectName, String Description) {
         this.projectName = projectName;
         this.Description = Description;
+    }
+
+    public double getTotalTime() {
+        double totalTime= 0;
+       for(ProjectHours p : projectInfo ){
+         totalTime = totalTime +  p.getHoursSpendt();
+       }
+       return totalTime;
     }
     
     
@@ -64,14 +72,6 @@ public class Project implements Serializable {
         this.devs = devs;
     }
     
-    public Long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
-    }
-
     public String getProjectName() {
         return projectName;
     }
@@ -90,8 +90,12 @@ public class Project implements Serializable {
 
     @Override
     public String toString() {
-        return "Project{" + "projectId=" + projectId + ", projectName=" + projectName + ", Description=" + Description + "  projectInfo=" + projectInfo + '}';
+        return "Project{" + "projectName=" + projectName + ", Description=" + Description + ", projectInfo=" + projectInfo + ", totalTime=" + totalTime + '}';
     }
+
+  
+
+
     
 
     
