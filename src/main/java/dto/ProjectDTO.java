@@ -5,6 +5,7 @@
  */
 package dto;
 
+import entities.Developer;
 import entities.Project;
 import entities.ProjectHours;
 import java.io.Serializable;
@@ -21,19 +22,13 @@ import javax.persistence.Id;
  */
 public class ProjectDTO  {
 private String projectName;
-private String Description;
-private double getTotalTime;
+private String projectDescription;
+private double totalTime;
 private double totalPrice;
+private List<DeveloperDTO> devs;
    List<ProjectHoursDTO> projectInfo;
 
-    public List<ProjectHoursDTO> getProjectInfo() {
-        return projectInfo;
-    }
-
-    public void setProjectInfo(List<ProjectHoursDTO> projectInfo) {
-        this.projectInfo = projectInfo;
-    }
-
+ 
     public double getTotalPrice() {
         return totalPrice;
     }
@@ -60,20 +55,48 @@ private double totalPrice;
 
     public ProjectDTO(String projectName, String Description) {
         this.projectName = projectName;
-        this.Description = Description;
+        this.projectDescription = Description;
     }
 
     public ProjectDTO(Project project) {
            this.projectName = project.getProjectName();
-        this.Description = project.getDescription();
-        this.getTotalTime = project.getTotalTime();
+        this.projectDescription = project.getDescription();
+        this.totalTime = project.getTotalTime();
         this.totalPrice = project.getTotalPrice();
         this.projectInfo = ProjectHoursDTO.getDtos(project.getProjectInfo());
+        this.devs = DeveloperDTO.getDtos(project.getDevs());
         
     }
 
+    public String getProjectDescription() {
+        return projectDescription;
+    }
+
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
+    }
+
+    public List<DeveloperDTO> getDevs() {
+        return devs;
+    }
+
+    public void setDevs(List<DeveloperDTO> devs) {
+        this.devs = devs;
+    }
+    
+
+    public List<ProjectHoursDTO> getProjectInfo() {
+        return projectInfo;
+    }
+
+    public void setProjectInfo(List<ProjectHoursDTO> projectInfo) {
+        this.projectInfo = projectInfo;
+    }
+
+    
+    
     public double getGetTotalTime() {
-        return getTotalTime;
+        return totalTime;
     }
 
 
@@ -86,19 +109,20 @@ private double totalPrice;
     }
 
     public String getDescription() {
-        return Description;
+        return projectDescription;
     }
 
     public void setDescription(String Description) {
-        this.Description = Description;
+        this.projectDescription = Description;
     }
 
     @Override
     public String toString() {
-        return "ProjectDTO{" + "projectName=" + projectName + ", Description=" + Description + ", getTotalTime=" + getTotalTime + ", totalPrice=" + totalPrice + ", projectInfo=" + projectInfo + '}';
+        return "ProjectDTO{" + "projectName=" + projectName + ", projectDescription=" + projectDescription + ", totalTime=" + totalTime + ", totalPrice=" + totalPrice + ", devs=" + devs + ", projectInfo=" + projectInfo + '}';
     }
 
-  
+ 
+   
 
 
  

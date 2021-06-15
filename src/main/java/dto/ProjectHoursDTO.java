@@ -77,13 +77,16 @@ public class ProjectHoursDTO {
         this.dev = dev;
     }
 
-
-
     @Override
     public String toString() {
-        return "ProjectHoursDTO{" + "hoursSpendt=" + hoursSpendt + ", userStory=" + userStory + ", description=" + description + ", dev=" + dev + ", projectName=" + projectName + '}';
+        return "ProjectHoursDTO{" + "dev=" + dev + '}';
     }
 
+  
+
+
+
+  
 
     
     

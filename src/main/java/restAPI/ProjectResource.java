@@ -16,6 +16,7 @@ import entities.Project;
 import entities.ProjectHours;
 import facade.ProjectFacade;
 import facade.ProjectHoursFacade;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
@@ -55,11 +56,12 @@ public class ProjectResource {
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"dev", "admin"})
     public String getAllProjects() throws Exception {
-        List<ProjectDTO> projects;
         String thisuser = securityContext.getUserPrincipal().getName();
-        projects = projectFacade.getAllProjects();
+        List<ProjectDTO> dto = projectFacade.getAllProjects();
+   
         System.out.println(thisuser + " req get all projects"); //DELETE
-        return GSON.toJson(projects);
+        System.out.println(dto);
+        return GSON.toJson(dto);
     }
 
     @Path("new")
@@ -220,7 +222,7 @@ public class ProjectResource {
             throw new WebApplicationException("ERROR " + e);
         }
 
-        return GSON.toJson("Infomation sucessfully editied: [" + edited_project.getUserStory() + "," + edited_project.getDescription() + "," + edited_project.getHoursSpendt() +"," + edited_project.getDev().getName() + "," +edited_project.getProjectName().getProjectName()  + "]");
+        return GSON.toJson("Infomation sucessfully editied: [" + edited_project.getUserStory() + "," + edited_project.getDescription() + "," + edited_project.getHoursSpendt() +"," + edited_project.getDev().getName() + ", TBA ]");
     }
 
 }
