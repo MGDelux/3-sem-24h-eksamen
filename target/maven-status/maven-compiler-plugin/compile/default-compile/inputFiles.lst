@@ -14,6 +14,7 @@ C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\m
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\errorhandling\API_ExceptionMapper.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\restAPI\ApplicationConfig.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\errorhandling\GenericExceptionMapper.java
+C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\facade\ProjectFacade.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\secuirty\errorhandling\AuthenticationExceptionMapper.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\restAPI\DummyResource.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\security\SharedSecret.java
@@ -32,6 +33,7 @@ C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\m
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\dto\CombinedDTO.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\secuirty\errorhandling\AuthenticationException.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\security\UserPrincipal.java
+C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\restAPI\ProjectResource.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\security\JWTAuthenticationFilter.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\errorhandling\API_Exception.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\entities\Project.java

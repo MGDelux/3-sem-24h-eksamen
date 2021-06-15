@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,8 @@ public class ProjectHours implements Serializable {
     private String userStory;
     private String description;
     private Developer dev;
-
+    @Column(name = "Project")
+    private Project projectName;
     public ProjectHours() {
     }
 
@@ -34,6 +36,14 @@ public class ProjectHours implements Serializable {
         this.hoursSpendt = hoursSpendt;
         this.userStory = userStory;
         this.description = description;
+    }
+
+    public Project getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(Project projectName) {
+        this.projectName = projectName;
     }
 
     
@@ -81,8 +91,10 @@ public class ProjectHours implements Serializable {
 
     @Override
     public String toString() {
-        return "ProjectHours{" + "hoursSpendt=" + hoursSpendt + ", userStory=" + userStory + ", description=" + description + ", dev=" + dev + '}';
+        return "ProjectHours{" + "id=" + id + ", hoursSpendt=" + hoursSpendt + ", userStory=" + userStory + ", description=" + description + ", dev=" + dev + ", projectName=" + projectName + '}';
     }
+
+
     
     
     

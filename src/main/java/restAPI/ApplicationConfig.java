@@ -26,6 +26,7 @@ public class ApplicationConfig extends Application {
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
         resources.add(restAPI.DummyResource.class);
         resources.add(restAPI.LoginResource.class);
+        resources.add(restAPI.ProjectResource.class);
         resources.add(secuirty.errorhandling.AuthenticationExceptionMapper.class);
         resources.add(secuirty.errorhandling.NotAuthorizedExceptionMapper.class);
         resources.add(security.JWTAuthenticationFilter.class);

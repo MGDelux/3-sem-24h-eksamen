@@ -1,12 +1,14 @@
 dto\CatFactDTO.class
 security\JWTSecurityContext.class
 errorhandling\API_ExceptionMapper.class
+facade\ProjectFacade.class
 security\SharedSecret.class
 secuirty\errorhandling\NotAuthorizedExceptionMapper.class
 dto\ChuckDTO.class
 secuirty\errorhandling\AuthenticationExceptionMapper.class
 restAPI\DummyResource.class
 entities\Developer.class
+restAPI\ProjectResource.class
 utils\DummyData.class
 entities\User.class
 facade\UserFacade.class
