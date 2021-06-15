@@ -9,11 +9,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -36,7 +33,7 @@ public class Project implements Serializable {
     private List<Developer> devs;
      @OneToMany(targetEntity = ProjectHours.class,cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
     private List<ProjectHours> projectInfo;
-    private double totalTime;
+    private double totalPrice;
 
     public Project() {
     }
@@ -52,6 +49,14 @@ public class Project implements Serializable {
          totalTime = totalTime +  p.getHoursSpendt();
        }
        return totalTime;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
     
     
@@ -92,7 +97,7 @@ public class Project implements Serializable {
 
     @Override
     public String toString() {
-        return "Project{" + "projectName=" + projectName + ", Description=" + Description + ", projectInfo=" + projectInfo + ", totalTime=" + totalTime + '}';
+        return "Project{" + "projectName=" + projectName + ", Description=" + Description + ", projectInfo=" + projectInfo + ", totalTime=" + totalPrice + '}';
     }
 
   

@@ -9,12 +9,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import dto.ProjectDTO;
+import dto.ProjectHoursDTO;
 import entities.Project;
 import entities.ProjectHours;
 import facade.ProjectFacade;
 import facade.ProjectHoursFacade;
-import facade.testFacade;
-import static java.lang.String.format;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
@@ -26,8 +26,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import utils.EntityManagerCreator;
@@ -183,15 +181,16 @@ public class ProjectResource {
     public String GetInvoiceForProject(String input) {
 
         String Project;
+        ProjectDTO reurnProject;
        
         try {
             JsonObject json = JsonParser.parseString(input).getAsJsonObject();
            Project = json.get("Project").getAsString();
-           projectFacade.getInvoice(Project);
+         reurnProject =  projectFacade.getInvoice(Project);
         } catch (Exception e) {
             throw new WebApplicationException("ERROR " + e);
         }
-      return GSON.toJson( "'inovice'");
+      return GSON.toJson("Project: "+ Project + " info: " + reurnProject.getDescription() + ", total time:" + reurnProject.getGetTotalTime() + ", total price "+ reurnProject.getTotalPrice() );
     }
 
     
@@ -207,7 +206,7 @@ public class ProjectResource {
         String userStory;
         String description;
         ProjectHours projectToEdit;
-        ProjectHours edited_project;
+        ProjectHoursDTO edited_project;
         try {
             JsonObject json = JsonParser.parseString(input).getAsJsonObject();
             id = json.get("Id").getAsInt();

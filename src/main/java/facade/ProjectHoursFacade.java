@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package facade;
+import dto.ProjectDTO;
+import dto.ProjectHoursDTO;
 import entities.Developer;
 import entities.Project;
 import entities.ProjectHours;
@@ -54,7 +56,7 @@ public class ProjectHoursFacade {
 return hours;
     }
 
-   public ProjectHours AdjustProjectHours(int id,ProjectHours edit ){
+   public ProjectHoursDTO AdjustProjectHours(int id,ProjectHours edit ){
                EntityManager em = emf.createEntityManager();
                 ProjectHours projectEdit ;
                try{
@@ -79,10 +81,10 @@ return hours;
         }catch (Exception e) {
             throw new WebApplicationException("Error" + e);
    }
-        return projectEdit;
+        return new ProjectHoursDTO(projectEdit);
    }
     
-     public Project newProjectHours(String developer, String Project, double hoursSpendt, String userStory, String description) {
+     public ProjectDTO newProjectHours(String developer, String Project, double hoursSpendt, String userStory, String description) {
         List<ProjectHours> projecth;
         EntityManager em = emf.createEntityManager();
         Project Findproject;
@@ -113,7 +115,7 @@ return hours;
         } catch (Exception e) {
             throw new WebApplicationException("SQL/EM ERROR in adding project infomation " + e);
         }
-        return Findproject;
+        return new ProjectDTO(Findproject);
     }
 
 

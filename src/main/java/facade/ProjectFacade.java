@@ -5,6 +5,7 @@
  */
 package facade;
 
+import dto.ProjectDTO;
 import entities.Developer;
 import entities.Project;
 import entities.ProjectHours;
@@ -36,7 +37,7 @@ public class ProjectFacade {
         return instance;
     }
 
-    public Project createProject(String projectName, String projectDesc) {
+    public ProjectDTO createProject(String projectName, String projectDesc) {
         Project newProject;
         EntityManager em = emf.createEntityManager();
 
@@ -62,10 +63,10 @@ public class ProjectFacade {
         } catch (Exception e) {
             throw new WebApplicationException("ERROR IN CREATING PROJECT: " + e);
         }
-        return newProject; //add dto if time.
+        return new ProjectDTO(newProject);
     }
 
-    public Project addDevToProject(String devName, String projectName) {
+    public ProjectDTO addDevToProject(String devName, String projectName) {
         EntityManager em = emf.createEntityManager();
         Developer dev;
         Project project;
@@ -92,10 +93,10 @@ public class ProjectFacade {
         } catch (Exception e) {
             throw new WebApplicationException("Something went horribly wrong adding " + dev.getName() + " to " + project.getProjectName() + " error: " + e);
         }
-        return project;
+        return new ProjectDTO(project);
     }
 
-    public Project deleteProject(String projectname) {
+    public ProjectDTO deleteProject(String projectname) {
         EntityManager em = emf.createEntityManager();
         Project project;
         try {
@@ -114,7 +115,7 @@ public class ProjectFacade {
             throw new WebApplicationException("error in removal: " + e);
 
         }
-        return project;
+        return new ProjectDTO(project);
     }
 
    
@@ -145,7 +146,7 @@ public class ProjectFacade {
         return allProjetsList;
     }
     
-    public Project getInvoice(String projectName){
+    public ProjectDTO getInvoice(String projectName){
           EntityManager em = emf.createEntityManager();
         Project project;
         List<Double> bills = new ArrayList<>();
@@ -175,7 +176,12 @@ public class ProjectFacade {
             totalPrice = totalPrice + bills.get(i) * hours.get(i);
         }
         System.out.println("Total price for project" + totalPrice );
-        return null;
+        project.setTotalPrice(totalPrice);
+      em.getTransaction().begin();
+      em.merge(project);
+      em.getTransaction().commit();
+
+        return new ProjectDTO(project);
     }
 
 }

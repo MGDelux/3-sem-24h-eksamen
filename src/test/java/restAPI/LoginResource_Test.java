@@ -113,7 +113,7 @@ public class LoginResource_Test {
     @AfterEach
     public void tearDown() {
     }
-@Test
+//@Test
 public void test(){
 
       System.out.println(">Testing API STATUS");
@@ -122,7 +122,7 @@ public void test(){
 
   
 }    
-@Test
+//@Test
 public void test2(){
 
       System.out.println(">Testing API STATUS 2");
