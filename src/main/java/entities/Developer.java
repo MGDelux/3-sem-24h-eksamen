@@ -8,6 +8,7 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -27,8 +29,8 @@ public class Developer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+  @Basic(optional = false)
+  @NotNull
       @Column(name = "user_name", length = 25)
     private String name;
     private String phoneNr;
@@ -42,7 +44,7 @@ public class Developer implements Serializable {
   private List<Role> roleList = new ArrayList<>();
     
    @JoinTable(name = "dev_project", joinColumns =  {
-   @JoinColumn(name = "name", referencedColumnName = "name")},inverseJoinColumns = {
+   @JoinColumn(name = "user_name", referencedColumnName = "user_name")},inverseJoinColumns = {
     @JoinColumn(name = "projectName", referencedColumnName = "projectName")})     
   @ManyToMany
   private List<Project> projects = new ArrayList<>();  
@@ -93,13 +95,6 @@ public class Developer implements Serializable {
     return this.password;
   }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -132,13 +127,14 @@ public class Developer implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "Developer{" + "id=" + id + ", name=" + name + ", phoneNr=" + phoneNr + ", billingPrHour=" + billingPrHour + ", roleList=" + roleList + '}';
+        return "Developer{" + "name=" + name + ", phoneNr=" + phoneNr + ", password=" + password + ", billingPrHour=" + billingPrHour + ", roleList=" + roleList + ", projects=" + projects + '}';
     }
+
+  
+   
 
  
 

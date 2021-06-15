@@ -6,8 +6,11 @@
 package utils;
 
 import entities.Developer;
+import entities.Project;
 import entities.Role;
 import entities.User;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -32,12 +35,22 @@ public class SetupUsers {
     EntityManager em = emf.createEntityManager();
       Developer dev_devRole = new Developer("dev_1", "53384818",12.5,"dev_1");
       Developer dev_AdminRole = new Developer("dev_2", "21231412",44.5,"dev_2");
+       List<Project> projets = new ArrayList<>();
+         List<Developer> devs = new ArrayList<>();
+         devs.add(dev_devRole);
+         devs.add(dev_AdminRole);
+      Project newproject = new Project("SolidMusic","an epic music app that does nothing :p");
+      projets.add(newproject);
           em.getTransaction().begin();
 
       Role userRole = new Role("dev");
       Role adminRole = new Role("admin");
       dev_devRole.addRole(userRole);
+      dev_devRole.setProjects(projets);
+        dev_AdminRole.setProjects(projets);
       dev_AdminRole.addRole(adminRole);
+      newproject.setDevs(devs);
+      em.persist(newproject);
        em.persist(userRole);
        em.persist(adminRole);
       em.persist(dev_devRole);

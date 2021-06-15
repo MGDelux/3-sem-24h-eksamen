@@ -25,13 +25,27 @@ public class ProjectHours implements Serializable {
     private double hoursSpendt;
     private String userStory;
     private String description;
+    private Developer dev;
 
     public ProjectHours() {
     }
+
+    public ProjectHours(double hoursSpendt, String userStory, String description, Developer dev) {
+        this.hoursSpendt = hoursSpendt;
+        this.userStory = userStory;
+        this.description = description;
+        this.dev = dev;
+    }
+
     
     
-    
-    
+    public Developer getDev() {
+        return dev;
+    }
+
+    public void setDev(Developer dev) {
+        this.dev = dev;
+    }
     
 
     public Long getId() {
