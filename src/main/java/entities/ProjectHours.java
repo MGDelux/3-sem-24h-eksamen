@@ -88,6 +88,11 @@ public class ProjectHours implements Serializable {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "ProjectHours{" + "id=" + id + ", hoursSpendt=" + hoursSpendt + ", userStory=" + userStory + ", description=" + description + ", dev=" + dev + ", projectName=" + projectName + '}';
+    }
+
 
     
     

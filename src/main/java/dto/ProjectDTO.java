@@ -6,6 +6,7 @@
 package dto;
 
 import entities.Project;
+import entities.ProjectHours;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,28 @@ private String projectName;
 private String Description;
 private double getTotalTime;
 private double totalPrice;
-  public double getTotalPrice() {
+   List<ProjectHoursDTO> projectInfo;
+
+    public List<ProjectHoursDTO> getProjectInfo() {
+        return projectInfo;
+    }
+
+    public void setProjectInfo(List<ProjectHoursDTO> projectInfo) {
+        this.projectInfo = projectInfo;
+    }
+
+    public double getTotalPrice() {
         return totalPrice;
+    }
+
+
+
+   public double getTotalTime() {
+        double totalTime= 0;
+       for(ProjectHoursDTO p : projectInfo ){
+         totalTime = totalTime +  p.getHoursSpendt();
+       }
+       return totalTime;
     }
 
     public void setTotalPrice(double totalPrice) {
@@ -47,6 +68,7 @@ private double totalPrice;
         this.Description = project.getDescription();
         this.getTotalTime = project.getTotalTime();
         this.totalPrice = project.getTotalPrice();
+        this.projectInfo = ProjectHoursDTO.getDtos(project.getProjectInfo());
         
     }
 
@@ -73,8 +95,11 @@ private double totalPrice;
 
     @Override
     public String toString() {
-        return "ProjectDTO{" + "projectName=" + projectName + ", Description=" + Description + ", getTotalTime=" + getTotalTime + ", totalPrice=" + totalPrice + '}';
+        return "ProjectDTO{" + "projectName=" + projectName + ", Description=" + Description + ", getTotalTime=" + getTotalTime + ", totalPrice=" + totalPrice + ", projectInfo=" + projectInfo + '}';
     }
+
+  
+
 
  
     

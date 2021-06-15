@@ -37,7 +37,7 @@ public class ProjectFacade {
         return instance;
     }
 
-    public ProjectDTO createProject(String projectName, String projectDesc) {
+    public Project createProject(String projectName, String projectDesc) {
         Project newProject;
         EntityManager em = emf.createEntityManager();
 
@@ -63,7 +63,7 @@ public class ProjectFacade {
         } catch (Exception e) {
             throw new WebApplicationException("ERROR IN CREATING PROJECT: " + e);
         }
-        return new ProjectDTO(newProject);
+        return  newProject;
     }
 
     public ProjectDTO addDevToProject(String devName, String projectName) {
@@ -132,18 +132,23 @@ public class ProjectFacade {
         return project;
     }
 
-    public List<Project> getAllProjects() {
+    public List<ProjectDTO> getAllProjects() throws Exception {
         EntityManager em = emf.createEntityManager();
-        List<Project> allProjetsList = new ArrayList<>();
-        try {
-            TypedQuery<Project> query = em.createQuery("SELECT r FROM Project r", Project.class);
-            List<Project> rms = query.getResultList();
-            allProjetsList.addAll(rms);
-            em.close();
-        } catch (Exception e) {
-            throw new WebApplicationException("ERROR IN GETTING PROJECTS! " + e);
-        }
-        return allProjetsList;
+          List<ProjectDTO> projects = new ArrayList<>();
+             try{
+                         TypedQuery<Project> query = em.createQuery("SELECT r FROM Project r", Project.class);
+                         List<Project> rms = query.getResultList();
+                         for (Project p : rms) {
+                           ProjectDTO dto = new ProjectDTO(p);
+                            dto.setProjectInfo(dto.getProjectInfo());
+                           projects.add(dto);
+                 }
+                         
+                        
+             }catch (Exception e){
+                 throw new Exception("FUCK" +e );
+             }
+             return projects;
     }
     
     public ProjectDTO getInvoice(String projectName){

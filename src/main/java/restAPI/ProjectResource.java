@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import dto.ProjectDTO;
 import dto.ProjectHoursDTO;
 import entities.Project;
@@ -53,8 +54,8 @@ public class ProjectResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"dev", "admin"})
-    public String getAllProjects() {
-        List<Project> projects;
+    public String getAllProjects() throws Exception {
+        List<ProjectDTO> projects;
         String thisuser = securityContext.getUserPrincipal().getName();
         projects = projectFacade.getAllProjects();
         System.out.println(thisuser + " req get all projects"); //DELETE
@@ -67,16 +68,15 @@ public class ProjectResource {
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"dev", "admin"}) //remove dev
     public String createNewProject(String input) {
-        String ProjectName;
-        String ProjectDesc;
+        String ProjectName = "";
+        String ProjectDesc = "";
         try {
-
             JsonObject json = JsonParser.parseString(input).getAsJsonObject();
             ProjectName = json.get("ProjectName").getAsString();
             ProjectDesc = json.get("ProjectDescription").getAsString();
 
             projectFacade.createProject(ProjectName, ProjectDesc);
-        } catch (Exception e) {
+        } catch (JsonSyntaxException e) {
             throw new WebApplicationException("ERROR " + e);
         }
 

@@ -19,8 +19,7 @@ public class ProjectHoursDTO {
     private double hoursSpendt;
     private String userStory;
     private String description;
-    private Developer dev;
-    private Project projectName;
+    private DeveloperDTO dev;
     
     
        public static List<ProjectHoursDTO> getDtos(List<ProjectHours> rms){
@@ -29,21 +28,19 @@ public class ProjectHoursDTO {
         return rmdtos;
     }
 
-    public ProjectHoursDTO(double hoursSpendt, String userStory, String description, Developer dev, Project projectName) {
+    public ProjectHoursDTO(double hoursSpendt, String userStory, String description, Developer dev ) {
         this.hoursSpendt = hoursSpendt;
         this.userStory = userStory;
         this.description = description;
-        this.dev = dev;
-        this.projectName = projectName;
+        this.dev = new DeveloperDTO(dev);
+  
     }
 
     public ProjectHoursDTO(ProjectHours ph) {
-          this.hoursSpendt = ph.getHoursSpendt();
+        this.hoursSpendt = ph.getHoursSpendt();
         this.userStory = ph.getUserStory();
         this.description = ph.getDescription();
-        this.dev = ph.getDev();
-        this.projectName =  ph.getProjectName();
-        
+        this.dev =  new DeveloperDTO(ph.getDev());        
     }
 
     
@@ -92,8 +89,8 @@ public class ProjectHoursDTO {
     public String toString() {
         return "ProjectHoursDTO{" + "hoursSpendt=" + hoursSpendt + ", userStory=" + userStory + ", description=" + description + ", dev=" + dev + ", projectName=" + projectName + '}';
     }
-    
-    
+
+
     
     
 }
