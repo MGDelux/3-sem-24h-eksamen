@@ -69,21 +69,15 @@ public class ProjectHoursDTO {
         this.description = description;
     }
 
-    public Developer getDev() {
+    public DeveloperDTO getDev() {
         return dev;
     }
 
-    public void setDev(Developer dev) {
+    public void setDev(DeveloperDTO dev) {
         this.dev = dev;
     }
 
-    public Project getProjectName() {
-        return projectName;
-    }
 
-    public void setProjectName(Project projectName) {
-        this.projectName = projectName;
-    }
 
     @Override
     public String toString() {
