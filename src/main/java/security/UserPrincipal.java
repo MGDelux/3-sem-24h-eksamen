@@ -1,6 +1,6 @@
 package security;
 
-import entities.User;
+import entities.Developer;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,8 +12,8 @@ public class UserPrincipal implements Principal {
   private List<String> roles = new ArrayList<>();
 
   /* Create a UserPrincipal, given the Entity class User*/
-  public UserPrincipal(User user) {
-    this.username = user.getUserName();
+  public UserPrincipal(Developer user) {
+    this.username = user.getName();
     this.roles = user.getRolesAsStrings();
   }
 

@@ -11,12 +11,10 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import entities.Developer;
-import facade.UserFacade;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import entities.User;
 import errorhandling.API_Exception;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -26,6 +24,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import security.*;
 import errorhandling.GenericExceptionMapper;
+import facade.DevFacade;
 import javax.persistence.EntityManagerFactory;
 import secuirty.errorhandling.AuthenticationException;
 import utils.EntityManagerCreator;
@@ -35,7 +34,7 @@ public class LoginEndpoint {
 
     public static final int TOKEN_EXPIRE_TIME = 1000 * 60 * 60; //60 min
     private static final EntityManagerFactory EMF = EntityManagerCreator.CreateEntityManager();
-    public static final UserFacade USER_FACADE = UserFacade.getUserFacade(EMF);
+    public static final DevFacade DEV_FACADE = DevFacade.getFacade(EMF);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -52,14 +51,14 @@ public class LoginEndpoint {
         }
 
         try {
-            Developer user = USER_FACADE.getVeryfiedUser(username, password);
+            Developer user = DEV_FACADE.getVeryfiedUser(username, password);
             String token = createToken(username, user.getRolesAsStrings());
             JsonObject responseJson = new JsonObject();
             responseJson.addProperty("username", username);
             responseJson.addProperty("token", token);
             return Response.ok(new Gson().toJson(responseJson)).build();
 
-        } catch (JOSEException | AuthenticationException ex) {
+        } catch (Exception ex) {
             if (ex instanceof AuthenticationException) {
                 throw (AuthenticationException) ex;
             }

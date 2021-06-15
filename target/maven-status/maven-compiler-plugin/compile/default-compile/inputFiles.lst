@@ -1,11 +1,9 @@
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\facade\DevFacade.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\security\LoginEndpoint.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\security\RolesAllowedFilter.java
-C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\entities\User.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\dto\ProjectHoursDTO.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\secuirty\errorhandling\NotAuthorizedExceptionMapper.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\facade\ProjectHoursFacade.java
-C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\facade\UserFacade.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\utils\DummyData.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\dto\ProjectDTO.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\utils\SetupUsers.java

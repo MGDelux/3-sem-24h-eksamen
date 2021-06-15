@@ -8,7 +8,6 @@ package utils;
 import entities.Developer;
 import entities.Project;
 import entities.Role;
-import entities.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;

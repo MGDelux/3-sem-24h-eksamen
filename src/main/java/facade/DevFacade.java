@@ -14,6 +14,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import secuirty.errorhandling.AuthenticationException;
 
 /**
  *
@@ -52,6 +53,18 @@ public class DevFacade {
              }
              return devs;
     }
-    
+    public Developer getVeryfiedUser(String username, String password) throws AuthenticationException {
+        EntityManager em = emf.createEntityManager();
+        Developer user;
+        try {
+            user = em.find(Developer.class, username);
+            if (user == null || !user.verifyPassword(password)) {
+                throw new AuthenticationException("Invalid user name or password");
+            }
+        } finally {
+            em.close();
+        }
+        return user;
+    }
     
 }

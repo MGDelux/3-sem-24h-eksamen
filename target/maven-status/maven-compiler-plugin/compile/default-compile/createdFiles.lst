@@ -8,8 +8,6 @@ facade\DevFacade.class
 entities\Developer.class
 restAPI\ProjectResource.class
 utils\DummyData.class
-entities\User.class
-facade\UserFacade.class
 utils\EntityManagerCreator.class
 utils\HTTPFetch.class
 entities\ProjectHours.class
