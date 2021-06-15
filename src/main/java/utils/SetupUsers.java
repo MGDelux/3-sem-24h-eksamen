@@ -48,7 +48,6 @@ public class SetupUsers {
         Role adminRole = new Role("admin");
         dev_devRole.addRole(userRole);
         dev_devRole.setProjects(projets);
-        dev_AdminRole.setProjects(projets);
         dev_AdminRole.addRole(adminRole);
         newproject.setDevs(devs);
         em.persist(newproject);

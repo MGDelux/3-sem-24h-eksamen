@@ -27,7 +27,6 @@ public class ProjectHours implements Serializable {
     private String userStory;
     private String description;
     private Developer dev;
-    @Column(name = "Project")
     private Project projectName;
     public ProjectHours() {
     }
@@ -87,11 +86,6 @@ public class ProjectHours implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "ProjectHours{" + "id=" + id + ", hoursSpendt=" + hoursSpendt + ", userStory=" + userStory + ", description=" + description + ", dev=" + dev + ", projectName=" + projectName + '}';
     }
 
 

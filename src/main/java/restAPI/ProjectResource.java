@@ -10,7 +10,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entities.Project;
+import entities.ProjectHours;
 import facade.ProjectFacade;
+import facade.ProjectHoursFacade;
 import facade.testFacade;
 import static java.lang.String.format;
 import java.util.List;
@@ -46,7 +48,8 @@ public class ProjectResource {
 
     private static final EntityManagerFactory EMF = EntityManagerCreator.CreateEntityManager();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final ProjectFacade facade = ProjectFacade.getFacade(EMF);
+    private static final ProjectFacade projectFacade = ProjectFacade.getFacade(EMF);
+    private static final ProjectHoursFacade PHoursFacade = ProjectHoursFacade.getFacade(EMF);
 
     @Path("all")
     @GET
@@ -55,14 +58,14 @@ public class ProjectResource {
     public String getAllProjects() {
         List<Project> projects;
         String thisuser = securityContext.getUserPrincipal().getName();
-        projects = facade.getAllProjects();
+        projects = projectFacade.getAllProjects();
         System.out.println(thisuser + " req get all projects"); //DELETE
         return GSON.toJson(projects);
     }
 
     @Path("new")
     @POST
-        @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"dev", "admin"}) //remove dev
     public String createNewProject(String input) {
@@ -73,11 +76,10 @@ public class ProjectResource {
             JsonObject json = JsonParser.parseString(input).getAsJsonObject();
             ProjectName = json.get("ProjectName").getAsString();
             ProjectDesc = json.get("ProjectDescription").getAsString();
-           
 
-            facade.createProject(ProjectName, ProjectDesc);
+            projectFacade.createProject(ProjectName, ProjectDesc);
         } catch (Exception e) {
-            throw new WebApplicationException("ERROR " +e );
+            throw new WebApplicationException("ERROR " + e);
         }
 
         return GSON.toJson(ProjectName + " Created Sucessfully");
@@ -96,19 +98,18 @@ public class ProjectResource {
             JsonObject json = JsonParser.parseString(input).getAsJsonObject();
             developer = json.get("Developer").getAsString();
             Project = json.get("Project").getAsString();
-          
-            facade.addDevToProject(developer, Project);
+
+            projectFacade.addDevToProject(developer, Project);
         } catch (Exception e) {
-            throw new WebApplicationException("ERROR " +e );
+            throw new WebApplicationException("ERROR " + e);
         }
 
         return GSON.toJson(developer + " added to project " + Project);
     }
-    
-    
-  @Path("AddProjectHours")
+
+    @Path("AddProjectHours")
     @POST
-     @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
 
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"dev", "admin"}) //remove dev
@@ -121,16 +122,106 @@ public class ProjectResource {
         try {
             JsonObject json = JsonParser.parseString(input).getAsJsonObject();
             Project = json.get("Project").getAsString();
-            hoursSpendt =  json.get("Hours").getAsDouble();
-            userStory =  json.get("UserStory").getAsString();
-            description =  json.get("Description").getAsString();
-          
-            facade.newProjectHours(developer, Project, hoursSpendt, userStory, description);
+            hoursSpendt = json.get("Hours").getAsDouble();
+            userStory = json.get("UserStory").getAsString();
+            description = json.get("Description").getAsString();
+
+            PHoursFacade.newProjectHours(developer, Project, hoursSpendt, userStory, description);
         } catch (Exception e) {
-            throw new WebApplicationException("ERROR " +e );
+            throw new WebApplicationException("ERROR " + e);
         }
 
-        return GSON.toJson("Infomation sucessfully added to project: "+Project );
+        return GSON.toJson("Infomation sucessfully added to project: " + Project);
+    }
+
+      @Path("DeleteProjectHours")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"dev", "admin"}) //remove dev
+    public String deleteSpecificProjectHours(String input) {
+       int id;
+       ProjectHours projectHours;
+       String project;
+        try {
+            JsonObject json = JsonParser.parseString(input).getAsJsonObject();
+           id = json.get("Id").getAsInt();
+           project = json.get("Project").getAsString();
+           
+        //  PHoursFacade.deleteProjectHours(id,project);
+        } catch (Exception e) {
+            throw new WebApplicationException("ERROR " + e);
+        }
+      return GSON.toJson("goner");
+    }
+     @Path("GetHours")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"dev", "admin"}) //remove dev
+    public String getHoursSpendOnProject(String input) {
+
+        String developer = securityContext.getUserPrincipal().getName();
+        String Project;
+        double hours;
+        try {
+            JsonObject json = JsonParser.parseString(input).getAsJsonObject();
+           Project = json.get("Project").getAsString();
+          hours = PHoursFacade.getHoursFromSpecificProject(developer, Project);
+        } catch (Exception e) {
+            throw new WebApplicationException("ERROR " + e);
+        }
+      return GSON.toJson( developer+ " total hours spendt on: "+ Project + " is: " + hours );
+    }
+    
+    
+    @Path("GetInvoice")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"dev", "admin"}) //remove dev
+    public String GetInvoiceForProject(String input) {
+
+        String Project;
+       
+        try {
+            JsonObject json = JsonParser.parseString(input).getAsJsonObject();
+           Project = json.get("Project").getAsString();
+           projectFacade.getInvoice(Project);
+        } catch (Exception e) {
+            throw new WebApplicationException("ERROR " + e);
+        }
+      return GSON.toJson( "'inovice'");
+    }
+
+    
+    @Path("EditHours")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON})
+    @RolesAllowed({"dev", "admin"}) //remove dev
+    public String adjustHoursInfomation(String input) {
+        String developer = securityContext.getUserPrincipal().getName();
+        int id;
+        double hoursSpendt;
+        String userStory;
+        String description;
+        ProjectHours projectToEdit;
+        ProjectHours edited_project;
+        try {
+            JsonObject json = JsonParser.parseString(input).getAsJsonObject();
+            id = json.get("Id").getAsInt();
+            hoursSpendt = json.get("Hours").getAsDouble();
+            userStory = json.get("UserStory").getAsString();
+            description = json.get("Description").getAsString();
+             projectToEdit = new ProjectHours(hoursSpendt,userStory,description);
+             System.out.println(projectToEdit);
+          edited_project =  PHoursFacade.AdjustProjectHours(id, projectToEdit);
+        } catch (Exception e) {
+            throw new WebApplicationException("ERROR " + e);
+        }
+
+        return GSON.toJson("Infomation sucessfully editied: [" + edited_project.getUserStory() + "," + edited_project.getDescription() + "," + edited_project.getHoursSpendt() +"," + edited_project.getDev().getName() + "," +edited_project.getProjectName().getProjectName()  + "]");
     }
 
 }

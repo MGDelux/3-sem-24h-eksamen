@@ -117,39 +117,7 @@ public class ProjectFacade {
         return project;
     }
 
-    public Project newProjectHours(String developer, String Project, double hoursSpendt, String userStory, String description) {
-        List<ProjectHours> projecth;
-        EntityManager em = emf.createEntityManager();
-        Project Findproject;
-        Developer findDev;
-        ProjectHours projectInfo;
-        try{
-         findDev=em.find(Developer.class, developer);
-         Findproject = em.find(Project.class, Project);
-         projectInfo = new ProjectHours(hoursSpendt,userStory,description);
-        }catch (Exception e) {
-            throw new WebApplicationException("Error in infomation please provide the correct infomation [" + developer + "," +Project + ","+hoursSpendt+"-"+userStory+"-"+description+"+]" );
-        }
-
-        try {
-            projectInfo.setProjectName(Findproject);
-            projecth = Findproject.getProjectInfo();
-            projecth.add(projectInfo);
-            projectInfo.setDev(findDev);
-            Findproject.setProjectInfo(projecth);
-
-        } catch (Exception e) {
-            throw new WebApplicationException("ERROR in adding project infomation " + e);
-        }
-        try {
-            em.getTransaction().begin();
-            em.merge(Findproject);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            throw new WebApplicationException("SQL/EM ERROR in adding project infomation " + e);
-        }
-        return Findproject;
-    }
+   
 
     public Project getProject(String projectName) {
         EntityManager em = emf.createEntityManager();
@@ -175,6 +143,39 @@ public class ProjectFacade {
             throw new WebApplicationException("ERROR IN GETTING PROJECTS! " + e);
         }
         return allProjetsList;
+    }
+    
+    public Project getInvoice(String projectName){
+          EntityManager em = emf.createEntityManager();
+        Project project;
+        List<Double> bills = new ArrayList<>();
+         List<Double> hours = new ArrayList<>();
+       double totalPrice = 0;
+        try {
+            project = em.find(Project.class, projectName);
+        } catch (Exception e) {
+            throw new WebApplicationException("Cannot find a projet with the name " + projectName + " " + e);
+        }
+        double hoursspendt =0;
+        int userStories = project.getProjectInfo().size();
+        for (ProjectHours p: project.getProjectInfo() ) {
+           hoursspendt = hoursspendt + p.getHoursSpendt();
+        }
+       
+        for (int i = 0; i < userStories; i++) {
+        bills.add(project.getProjectInfo().get(i).getDev().getBillingPrHour());
+        hours.add(project.getProjectInfo().get(i).getHoursSpendt());
+            }
+        
+         System.out.println("total user stories "+userStories);
+        System.out.println("total hours spendt on project: "+ hoursspendt);
+        System.out.println("bills" + bills.toString());
+        System.out.println("hours"+ hours.toString());
+        for (int i = 0; i < bills.size(); i++) {
+            totalPrice = totalPrice + bills.get(i) * hours.get(i);
+        }
+        System.out.println("Total price for project" + totalPrice );
+        return null;
     }
 
 }

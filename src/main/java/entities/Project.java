@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -36,6 +37,7 @@ public class Project implements Serializable {
      @OneToMany(targetEntity = ProjectHours.class,cascade = CascadeType.PERSIST,fetch=FetchType.EAGER)
     private List<ProjectHours> projectInfo;
     private double totalTime;
+
     public Project() {
     }
 

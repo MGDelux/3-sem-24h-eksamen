@@ -26,6 +26,7 @@ security\LoginEndpoint.class
 cors\CorsFilter.class
 entities\Role.class
 security\JWTAuthenticationFilter.class
+facade\ProjectHoursFacade.class
 dto\CombinedDTO.class
 dto\JokeDTO.class
 dto\StarWarsShipDTO.class
