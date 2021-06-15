@@ -13,7 +13,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author mathi
+ * @author mathias
  */
 @Entity
 public class ProjectHours implements Serializable {
@@ -22,6 +22,52 @@ public class ProjectHours implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private double hoursSpendt;
+    private String userStory;
+    private String description;
 
+    public ProjectHours() {
+    }
+    
+    
+    
+    
+    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public double getHoursSpendt() {
+        return hoursSpendt;
+    }
+
+    public void setHoursSpendt(double hoursSpendt) {
+        this.hoursSpendt = hoursSpendt;
+    }
+
+    public String getUserStory() {
+        return userStory;
+    }
+
+    public void setUserStory(String userStory) {
+        this.userStory = userStory;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
+    
+    
 
 }

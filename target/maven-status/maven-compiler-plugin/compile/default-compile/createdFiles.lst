@@ -6,13 +6,16 @@ secuirty\errorhandling\NotAuthorizedExceptionMapper.class
 dto\ChuckDTO.class
 secuirty\errorhandling\AuthenticationExceptionMapper.class
 restAPI\DummyResource.class
+entities\Developer.class
 utils\DummyData.class
 entities\User.class
 facade\UserFacade.class
 utils\EntityManagerCreator.class
 utils\HTTPFetch.class
+entities\ProjectHours.class
 security\UserPrincipal.class
 dto\DummyDto.class
+entities\Project.class
 utils\test.class
 errorhandling\GenericExceptionMapper.class
 facade\testFacade.class

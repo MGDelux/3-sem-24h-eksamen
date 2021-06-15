@@ -8,6 +8,7 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,13 +29,14 @@ public class Developer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+      @Column(name = "user_name", length = 25)
     private String name;
     private String phoneNr;
     private String password;
 
     private double billingPrHour;
     @JoinTable(name = "user_roles", joinColumns = {
-    @JoinColumn(name = "name", referencedColumnName = "name")}, inverseJoinColumns = {
+    @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
     @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
@@ -87,7 +89,9 @@ public class Developer implements Serializable {
   public void addRole(Role userRole) {
     roleList.add(userRole);
   }
-    
+     public String getUserPass() {
+    return this.password;
+  }
 
     public int getId() {
         return id;

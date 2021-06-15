@@ -78,7 +78,7 @@ public class LoginResource_Test {
         httpServer.shutdownNow();   
     }
     
-    @BeforeEach
+   // @BeforeEach
     public void setUp() {
          System.out.println("####################################");
         System.out.println(">START TEST...");

@@ -1,6 +1,7 @@
 package restAPI;
 
 import com.google.gson.Gson;
+import entities.Developer;
 import entities.User;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
@@ -40,8 +41,8 @@ public class LoginResource {
 
         EntityManager em = EMF.createEntityManager();
         try {
-            TypedQuery<User> query = em.createQuery ("select u from User u",entities.User.class);
-            List<User> users = query.getResultList();
+            TypedQuery<Developer> query = em.createQuery ("select u from Developer u",entities.Developer.class);
+            List<Developer> users = query.getResultList();
             return "[" + users.size() + "]";
         } finally {
             em.close();

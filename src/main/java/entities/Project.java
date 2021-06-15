@@ -39,6 +39,13 @@ public class Project implements Serializable {
     public Project() {
     }
 
+    public Project(String projectName, String Description) {
+        this.projectName = projectName;
+        this.Description = Description;
+    }
+    
+    
+
     public List<ProjectHours> getProjectInfo() {
         return projectInfo;
     }

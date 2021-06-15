@@ -33,7 +33,7 @@ import utils.EntityManagerCreator;
 @Path("login")
 public class LoginEndpoint {
 
-    public static final int TOKEN_EXPIRE_TIME = 1000 * 60 * 60; //30 min
+    public static final int TOKEN_EXPIRE_TIME = 1000 * 60 * 60; //60 min
     private static final EntityManagerFactory EMF = EntityManagerCreator.CreateEntityManager();
     public static final UserFacade USER_FACADE = UserFacade.getUserFacade(EMF);
 
