@@ -10,6 +10,7 @@ import com.nimbusds.jose.JWSSigner;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import entities.Developer;
 import facade.UserFacade;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +33,7 @@ import utils.EntityManagerCreator;
 @Path("login")
 public class LoginEndpoint {
 
-    public static final int TOKEN_EXPIRE_TIME = 1000 * 60 * 30; //30 min
+    public static final int TOKEN_EXPIRE_TIME = 1000 * 60 * 60; //30 min
     private static final EntityManagerFactory EMF = EntityManagerCreator.CreateEntityManager();
     public static final UserFacade USER_FACADE = UserFacade.getUserFacade(EMF);
 
@@ -51,7 +52,7 @@ public class LoginEndpoint {
         }
 
         try {
-            User user = USER_FACADE.getVeryfiedUser(username, password);
+            Developer user = USER_FACADE.getVeryfiedUser(username, password);
             String token = createToken(username, user.getRolesAsStrings());
             JsonObject responseJson = new JsonObject();
             responseJson.addProperty("username", username);
