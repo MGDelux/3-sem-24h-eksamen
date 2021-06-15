@@ -1,3 +1,4 @@
+C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\facade\DevFacade.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\security\LoginEndpoint.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\security\RolesAllowedFilter.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\entities\User.java
@@ -17,6 +18,7 @@ C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\m
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\security\SharedSecret.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\utils\HTTPFetch.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\entities\Developer.java
+C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\restAPI\DevResource.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\errorhandling\NotFoundException.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\entities\ProjectHours.java
 C:\Users\mathi\Documents\NetBeansProjects\SolidCode-StartCode-BackEnd-Exam\src\main\java\restAPI\LoginResource.java

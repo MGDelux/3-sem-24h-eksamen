@@ -4,6 +4,7 @@ facade\ProjectFacade.class
 security\SharedSecret.class
 secuirty\errorhandling\NotAuthorizedExceptionMapper.class
 secuirty\errorhandling\AuthenticationExceptionMapper.class
+facade\DevFacade.class
 entities\Developer.class
 restAPI\ProjectResource.class
 utils\DummyData.class
@@ -22,6 +23,7 @@ entities\Role.class
 dto\ProjectHoursDTO.class
 security\JWTAuthenticationFilter.class
 facade\ProjectHoursFacade.class
+restAPI\DevResource.class
 dto\DeveloperDTO.class
 dto\ProjectDTO.class
 restAPI\LoginResource.class

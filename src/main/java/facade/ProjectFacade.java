@@ -71,25 +71,36 @@ public class ProjectFacade {
         Developer dev;
         Project project;
         try {
+            System.out.println("find");
             dev = em.find(Developer.class, devName);
             project = em.find(Project.class, projectName);
+            System.out.println("found");
         } catch (WebApplicationException e) {
             throw new WebApplicationException("Cannot find Dev or Project: " + e);
         }
 
         try {
+           List<Project> projets = new ArrayList<>();
+
             List<Developer> devs = project.getDevs();
             for (Developer d : devs) {
+                System.out.println("loop");
                 if (d.getName().equals(devName)) {
                     throw new WebApplicationException(d.getName() + " is already a memember if this project.");
                 }
 
             }
+            System.out.println("persisting");
+         
+            
             devs.add(dev);
+            projets.add(project);
+            dev.setProjects(projets);
             em.getTransaction().begin();
-            project.setDevs(devs);
-            em.merge(project);
+            
+            em.merge(dev);
             em.getTransaction().commit();
+            System.out.println("puuur");
         } catch (Exception e) {
             throw new WebApplicationException("Something went horribly wrong adding " + dev.getName() + " to " + project.getProjectName() + " error: " + e);
         }

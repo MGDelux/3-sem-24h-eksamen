@@ -128,7 +128,7 @@ public class ProjectResource {
 
             PHoursFacade.newProjectHours(developer, Project, hoursSpendt, userStory, description);
         } catch (Exception e) {
-            throw new WebApplicationException("ERROR " + e);
+            throw new WebApplicationException("ERROR could not be found " + e);
         }
 
         return GSON.toJson("Infomation sucessfully added to project: " + Project);
@@ -192,7 +192,7 @@ public class ProjectResource {
         } catch (Exception e) {
             throw new WebApplicationException("ERROR " + e);
         }
-      return GSON.toJson("Project: "+ Project + " info: " + reurnProject.getDescription() + ", total time:" + reurnProject.getGetTotalTime() + ", total price "+ reurnProject.getTotalPrice() );
+      return GSON.toJson(reurnProject);
     }
 
     
