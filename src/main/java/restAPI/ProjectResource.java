@@ -69,10 +69,8 @@ public class ProjectResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllProjects() throws Exception {
-        String thisuser = securityContext.getUserPrincipal().getName();
         List<ProjectDTO> dto = projectFacade.getAllProjects();
    
-        System.out.println(thisuser + " req get all projects"); //DELETE
         System.out.println(dto);
         return GSON.toJson(dto);
     }
