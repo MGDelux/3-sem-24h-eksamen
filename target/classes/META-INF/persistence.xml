@@ -32,10 +32,10 @@
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="eclipselink.canonicalmodel.subpackage" value="ghy636765"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://solidcode.xyz:3306/Exam?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Exam?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="dev"/>
       <property name="javax.persistence.jdbc.password" value="ax2"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <!-- You can raise the logging level to one of the following values CONFIG, FINE, FINER, FINEST, ALL for better,
                  but also more verbose, log-info -->
       <property name="eclipselink.logging.level" value="INFO"/>
