@@ -31,6 +31,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import utils.EntityManagerCreator;
+import utils.SetupUsers;
 
 /**
  *
@@ -51,6 +52,13 @@ public class ProjectResource {
     private static final ProjectFacade projectFacade = ProjectFacade.getFacade(EMF);
     private static final ProjectHoursFacade PHoursFacade = ProjectHoursFacade.getFacade(EMF);
 
+     @Path("4test")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+
+    public void testrun() throws Exception {
+        SetupUsers.run();
+    }
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})

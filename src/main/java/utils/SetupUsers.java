@@ -20,8 +20,11 @@ import javax.persistence.EntityManagerFactory;
 public class SetupUsers {
 
     public static EntityManagerFactory emf;
-
     public static void main(String[] args) {
+        run();
+    }
+
+public static void run(){
         boolean test = true;
         System.out.println("ADDING  (DUMMY) USERS TO DB");
         if (test == true) {
