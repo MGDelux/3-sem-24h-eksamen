@@ -67,6 +67,30 @@ public class LoginResource_Test {
     @BeforeAll
     public static void setUpClass() {
         emf = EntityManagerCreator.CreateEntityManagerTest();
+
+
+        httpServer = startServer();
+        //Setup RestAssured
+        RestAssured.baseURI = SERVER_URL;
+        RestAssured.port = SERVER_PORT;
+        RestAssured.defaultParser = Parser.JSON;
+    }
+    
+    static HttpServer startServer(){
+        System.out.println("SERVER START");
+        ResourceConfig rc = ResourceConfig.forApplication(new ApplicationConfig());
+        return GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
+    }
+            
+    
+    @AfterAll
+    public static void tearDownClass() {
+
+        httpServer.shutdownNow();   
+    }
+    
+  @BeforeEach
+    public void setUp() {
          System.out.println("####################################");
         System.out.println(">START TEST...");
                 EntityManager em = emf.createEntityManager();
@@ -101,30 +125,6 @@ public class LoginResource_Test {
         } finally {
             em.close();
         }
-
-        httpServer = startServer();
-        //Setup RestAssured
-        RestAssured.baseURI = SERVER_URL;
-        RestAssured.port = SERVER_PORT;
-        RestAssured.defaultParser = Parser.JSON;
-    }
-    
-    static HttpServer startServer(){
-        System.out.println("SERVER START");
-        ResourceConfig rc = ResourceConfig.forApplication(new ApplicationConfig());
-        return GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
-    }
-            
-    
-    @AfterAll
-    public static void tearDownClass() {
-
-        httpServer.shutdownNow();   
-    }
-    
-  @BeforeEach
-    public void setUp() {
-
     }
     
 
