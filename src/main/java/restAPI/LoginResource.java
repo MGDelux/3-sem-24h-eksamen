@@ -2,6 +2,7 @@ package restAPI;
 
 import com.google.gson.Gson;
 import entities.Developer;
+
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;

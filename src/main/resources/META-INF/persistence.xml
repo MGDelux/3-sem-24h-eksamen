@@ -4,6 +4,11 @@
   <persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <!--    <class>entities.RenameMe</class>-->
+    <class>entities.Developer</class>
+    <class>entities.DummyEntity</class>
+    <class>entities.Project</class>
+    <class>entities.ProjectHours</class>
+    <class>entities.Role</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- DO NOT remove the line below. It's not set by the  entityUtils.EMF_Creator -->
@@ -28,6 +33,11 @@
     <!-- DO NOT RENAME THE PERSISTENCE UNIT -->
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <!--            <class>entities.RenameMe</class>-->
+    <class>entities.Developer</class>
+    <class>entities.DummyEntity</class>
+    <class>entities.Project</class>
+    <class>entities.ProjectHours</class>
+    <class>entities.Role</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

@@ -57,12 +57,17 @@ public class ProjectResource {
     @Produces({MediaType.APPLICATION_JSON})
 
     public void testrun() throws Exception {
-        SetupUsers.run();
+        try{
+            SetupUsers.run();
+        }catch (Exception e){
+                        throw new WebApplicationException("ERROR " + e);
+
+        }
+        
     }
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @RolesAllowed({"dev", "admin"})
     public String getAllProjects() throws Exception {
         String thisuser = securityContext.getUserPrincipal().getName();
         List<ProjectDTO> dto = projectFacade.getAllProjects();

@@ -27,7 +27,7 @@ public class SetupUsers {
 public static void run(){
         boolean test = true;
         System.out.println("ADDING  (DUMMY) USERS TO DB");
-        if (test == true) {
+        if (test == false) {
             emf = EntityManagerCreator.CreateEntityManagerTest();
             System.out.println("USING TEST DB");
         } else {

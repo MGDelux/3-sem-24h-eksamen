@@ -9,12 +9,14 @@ import dto.DeveloperDTO;
 import dto.ProjectDTO;
 import entities.Developer;
 import entities.Project;
+import entities.Role;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import secuirty.errorhandling.AuthenticationException;
+import static utils.SetupUsers.emf;
 
 /**
  *
@@ -65,6 +67,20 @@ public class DevFacade {
             em.close();
         }
         return user;
+    }
+
+    public void createDev(String name, String role) {
+                EntityManager em = emf.createEntityManager();
+                Role userRole = new Role(role);
+             Developer user = new Developer(name,"53123123",125.0,name+"_1");
+                     em.getTransaction().begin();
+                     user.addRole(userRole);
+                     em.persist(userRole);
+                     em.persist(user);
+               em.getTransaction().commit();
+
+
+             
     }
     
 }
