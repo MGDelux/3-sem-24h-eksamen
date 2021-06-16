@@ -66,43 +66,45 @@ public class ProjectFacade {
         return  newProject;
     }
 
-    public ProjectDTO addDevToProject(String devName, String projectName) {
+    public ProjectDTO addDevToProject(Developer developer, String projectName) {
         EntityManager em = emf.createEntityManager();
-        Developer dev;
+      
+           
         Project project;
+     
         try {
-            System.out.println("find");
-            dev = em.find(Developer.class, devName);
+           
             project = em.find(Project.class, projectName);
-            System.out.println("found");
         } catch (WebApplicationException e) {
             throw new WebApplicationException("Cannot find Dev or Project: " + e);
         }
 
         try {
+               System.out.println("2");
            List<Project> projets = new ArrayList<>();
 
             List<Developer> devs = project.getDevs();
             for (Developer d : devs) {
-                System.out.println("loop");
-                if (d.getName().equals(devName)) {
+                if (d.getName().equals(developer)) {
                     throw new WebApplicationException(d.getName() + " is already a memember if this project.");
                 }
 
             }
-            System.out.println("persisting");
          
-            
-            devs.add(dev);
+               System.out.println("3");
+            devs.add(developer);
+            System.out.println(project);
             projets.add(project);
-            dev.setProjects(projets);
+                System.out.println("3,2");
+                System.out.println("3,3");
             em.getTransaction().begin();
-            
-            em.merge(dev);
+              System.out.println("3,4");
+            em.merge(developer);
+               System.out.println("3,5");
             em.getTransaction().commit();
-            System.out.println("puuur");
+               System.out.println("4");
         } catch (Exception e) {
-            throw new WebApplicationException("Something went horribly wrong adding " + dev.getName() + " to " + project.getProjectName() + " error: " + e);
+            throw new WebApplicationException("Something went horribly wrong adding " + developer.getName() + " to " + project.getProjectName() + " error: " + e);
         }
         return new ProjectDTO(project);
     }
@@ -198,6 +200,12 @@ public class ProjectFacade {
       em.getTransaction().commit();
 
         return new ProjectDTO(project);
+    }
+
+    private Developer findDev(String name) {
+           EntityManager em = emf.createEntityManager();
+         Developer dev=  em.find(Developer.class, name);
+return dev;
     }
 
 }

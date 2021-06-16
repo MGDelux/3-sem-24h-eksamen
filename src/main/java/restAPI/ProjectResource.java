@@ -12,6 +12,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import dto.ProjectDTO;
 import dto.ProjectHoursDTO;
+import entities.Developer;
 import entities.Project;
 import entities.ProjectHours;
 import facade.ProjectFacade;
@@ -19,6 +20,7 @@ import facade.ProjectHoursFacade;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -102,6 +104,8 @@ public class ProjectResource {
     @Produces({MediaType.APPLICATION_JSON})
     @RolesAllowed({"dev", "admin"}) //remove dev
     public String addDevToProject(String input) {
+                EntityManager em = EMF.createEntityManager();
+
         String developer;
         String Project;
         try {
@@ -109,8 +113,9 @@ public class ProjectResource {
             JsonObject json = JsonParser.parseString(input).getAsJsonObject();
             developer = json.get("Developer").getAsString();
             Project = json.get("Project").getAsString();
-
-            projectFacade.addDevToProject(developer, Project);
+            Developer dev =  em.find(Developer.class,developer);
+            System.out.println(dev);
+            projectFacade.addDevToProject(dev, Project);
         } catch (Exception e) {
             throw new WebApplicationException("ERROR " + e);
         }
